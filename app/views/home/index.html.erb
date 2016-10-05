@@ -1,0 +1,6 @@
+<% if current_user.blank? %>
+  Welcome guest, please <%= link_to "Sign In", new_user_session_path %> first.
+  Or you don't have any account? <%= link_to "Sign Up", new_user_registration_path %>
+<% else %>
+  Welcome <%= current_user.email %>
+<% end %>

@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>
+    <%= @profile.present? ? @profile.name : @parent_folder.folder_name %>
+  </h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Last Modified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @backup_files.each do |backup_file| %>
+      <tr>
+        <td>
+          <%= render_backup_file_name(backup_file) %>
+        </td>
+        <td><%= number_to_human_size backup_file.file_size %></td>
+        <td><%=l backup_file.last_modified_time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

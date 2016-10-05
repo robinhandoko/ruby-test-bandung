@@ -1,0 +1,61 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+footer {
+  position:fixed;
+  bottom:0;
+}
+
+
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+.form-actions{
+  margin-top: 15px;
+}
+
+.wysihtml5-sandbox{
+  height: 300px !important;
+}
+
+.clear{
+  clear: both;
+}
+
+.possible-answer-list{
+  margin-left: 20px;
+}
+
+.paginate-section{
+  font-size: 20px;
+}
+
+.quiz-mode{
+  margin-top: 30px;
+}
+
+.question-info{
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.quiz-mode-answer{
+  list-style-type: none;
+}
