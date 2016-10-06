@@ -7,29 +7,31 @@ class Profile < ActiveRecord::Base
   validates :name, :exclude_path, :include_path, presence: true
 
   def get_executeable_path
-    execute_path = []
-
+    tmp_hash = []
     include_path.split(",").each do |path|
-      Dir["#{path}/**/*"].each do |stuff|
-        exclude_path.split(",").each do |exclude|
-          next if stuff.match("#{exclude}")
-          execute_path << stuff
-        end
-      end
+      tmp_hash << { path: path, content: Profile.construct_execute_hash(path, {files: []}, exclude_path)}
     end
 
-    execute_path.uniq
+    tmp_hash
   end
 
-  def build_hash
-    path_file = []
-    include_path.split(",").each do |path|
-      Dir.foreach(path) do |entry|
-         path_file << entry
+  def self.construct_execute_hash(path, tmp_hash, exclude_path)
+    Dir.foreach(path) do |fname|
+      next if fname[0] == "."
+
+      x = path + "/#{fname}"
+      next if x.match("#{exclude_path}")
+
+      if File.directory?(x)
+        tmp_hash[fname] = { files: []}
+        selected_hash = tmp_hash[fname]
+        Profile.construct_execute_hash(x, selected_hash, exclude_path)
+      else
+        tmp_hash[:files] << fname
       end
     end
 
-     path_file
+    tmp_hash
   end
 
   def execute_backup
