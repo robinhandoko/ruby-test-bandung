@@ -12,3 +12,5 @@
 !/log/.keep
 /tmp
 /public/*
+.DS_Store
+.byebug_history
