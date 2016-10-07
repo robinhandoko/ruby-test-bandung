@@ -1,19 +1,22 @@
 <%- model_class = Profile -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<table class="table table-striped">
+
+<div class="table-responsive">
+  <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:storage) %></th>
-      <th><%= model_class.human_attribute_name(:include_path) %></th>
-      <th><%= model_class.human_attribute_name(:exclude_path) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th width="10%"><%= model_class.human_attribute_name(:name) %></th>
+      <th width="10%"><%= model_class.human_attribute_name(:storage) %></th>
+      <th width="25%"><%= model_class.human_attribute_name(:include_path) %></th>
+      <th width="25%"><%= model_class.human_attribute_name(:exclude_path) %></th>
+      <th width="15%"><%= model_class.human_attribute_name(:created_at) %></th>
+      <th width="10%">Action</th>
     </tr>
   </thead>
+
   <tbody>
     <% @profiles.each do |profile| %>
       <tr>
@@ -29,16 +32,21 @@
             class: 'btn btn-info btn-xs glyphicon glyphicon-flash'
           %>
 
+          <%= link_to "", browse_profile_path(profile),
+            class: 'btn btn-default btn-xs glyphicon glyphicon-folder-open'
+          %>
+
           <%= link_to "", profile_path(profile),
-            :method => :delete,
-            :data => { :confirm => 'Are you sure?' },
-            :class => 'btn btn-xs btn-danger glyphicon glyphicon-trash' %>
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'btn btn-xs btn-danger glyphicon glyphicon-trash'
+          %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_profile_path,
-            :class => 'btn btn-primary' %>
+
+<%= link_to "New", new_profile_path, class: 'btn btn-primary' %>

@@ -46,7 +46,7 @@ class ProfilesController < ApplicationController
 
   def show_detail
     @parent_folder =  BackupFile.find_by_id(params[:id])
-    @backup_files = BackupFile.where(parent_id: params[:id])
+    @backup_files = BackupFile.where(parent_id: params[:id]).order("backup_type, folder_name")
 
     render template: "profiles/browse"
   end
